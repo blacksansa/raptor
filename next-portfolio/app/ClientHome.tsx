@@ -52,7 +52,8 @@ export default function ClientHome(): JSX.Element {
     if (!cursor || !trail) return
     let mx = 0, my = 0
     const onMove = (e: MouseEvent) => {
-      mx = e.clientX; my = e.clientY
+      mx = e.clientX;
+      my = e.clientY;
       (cursor as HTMLElement).style.left = mx + 'px'
       (cursor as HTMLElement).style.top = my + 'px'
       setTimeout(() => {
