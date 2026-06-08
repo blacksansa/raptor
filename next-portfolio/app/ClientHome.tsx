@@ -26,8 +26,17 @@ export default function ClientHome(): JSX.Element {
 
       // fallback to localStorage or initial
       const stored = typeof window !== 'undefined' ? localStorage.getItem('bs_projects') : null
-      if (stored) setProjects(JSON.parse(stored))
-      else setProjects(initialProjects)
+      if (stored) {
+        try {
+          const parsed = JSON.parse(stored)
+          if (Array.isArray(parsed)) setProjects(parsed)
+          else setProjects(initialProjects)
+        } catch (err) {
+          // corrupted localStorage entry — clear and fallback
+          localStorage.removeItem('bs_projects')
+          setProjects(initialProjects)
+        }
+      } else setProjects(initialProjects)
     })()
 
     return () => { mounted = false }
