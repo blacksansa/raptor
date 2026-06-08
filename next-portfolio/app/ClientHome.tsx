@@ -84,7 +84,10 @@ export default function ClientHome(): JSX.Element {
       setUrl('')
       setTitle('')
       return
-    } catch (e) {
+    } catch (e: any) {
+      console.error('Supabase insert error', e)
+      // surface error to user so they can inspect RLS/policies
+      if (typeof window !== 'undefined') alert('Erro ao salvar no Supabase: ' + (e?.message || JSON.stringify(e)))
       // fallback local
     }
 
@@ -100,8 +103,9 @@ export default function ClientHome(): JSX.Element {
       await sbDeleteProject(id)
       setProjects(prev => prev.filter(p => p.id !== id))
       return
-    } catch (e) {
-      // fallback local deletion
+    } catch (e: any) {
+      console.error('Supabase delete error', e)
+      if (typeof window !== 'undefined') alert('Erro ao remover no Supabase: ' + (e?.message || JSON.stringify(e)))
     }
     setProjects(prev => prev.filter(p => p.id !== id))
   }
