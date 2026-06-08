@@ -1,8 +1,8 @@
-import ClientHome from './ClientHome'
+'use client'
+import { useEffect, useState } from 'react'
+import { initialProjects } from '../data/portfolio'
 
-export default function Page(){
-  return <ClientHome />
-}
+export default function ClientHome(){
   const [projects, setProjects] = useState([])
   const [url, setUrl] = useState('')
   const [title, setTitle] = useState('')
@@ -20,7 +20,6 @@ export default function Page(){
   }, [projects])
 
   useEffect(() => {
-    // custom cursor interactions
     const cursor = document.getElementById('cursor')
     const trail = document.getElementById('cursor-trail')
     if (!cursor || !trail) return
@@ -45,8 +44,7 @@ export default function Page(){
     return () => {
       document.removeEventListener('mousemove', onMove)
       els.forEach(el => {
-        el.removeEventListener('mouseenter', () => {})
-        el.removeEventListener('mouseleave', () => {})
+        // best-effort cleanup
       })
     }
   }, [projects])
@@ -66,20 +64,12 @@ export default function Page(){
     setProjects(prev => prev.filter(p => p.id !== id))
   }
 
-  function iframeLoaded(id) {
-    setLoaded(prev => ({ ...prev, [id]: true }))
-  }
+  function iframeLoaded(id) { setLoaded(prev => ({ ...prev, [id]: true })) }
+  function iframeError(id) { setLoaded(prev => ({ ...prev, [id]: false })) }
 
-  function iframeError(id) {
-    setLoaded(prev => ({ ...prev, [id]: false }))
-  }
-
-  function toggleLayout() {
-    setListLayout(v => !v)
-  }
+  function toggleLayout() { setListLayout(v => !v) }
 
   useEffect(() => {
-    // simple scroll animations using IntersectionObserver
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
