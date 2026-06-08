@@ -17,7 +17,7 @@ export default function ClientHome(): JSX.Element {
       try {
         const rows = await listProjects()
         if (mounted && rows.length) {
-          setProjects(rows.map(r => ({ id: r.id, url: r.url, title: r.title, desc: r.desc ?? '' })))
+          setProjects(rows.map(r => ({ id: r.id, url: r.url, title: r.title, description: r.description ?? '' })))
           return
         }
       } catch (e) {
@@ -70,8 +70,8 @@ export default function ClientHome(): JSX.Element {
     if (!newUrl.startsWith('http://') && !newUrl.startsWith('https://')) newUrl = 'https://' + newUrl
 
     try {
-      const inserted = await sbCreateProject({ url: newUrl, title: title || 'Sem título', desc: '' })
-      setProjects(prev => [{ id: inserted.id, url: inserted.url, title: inserted.title, desc: inserted.desc ?? '' }, ...prev])
+      const inserted = await sbCreateProject({ url: newUrl, title: title || 'Sem título', description: '' })
+      setProjects(prev => [{ id: inserted.id, url: inserted.url, title: inserted.title, description: inserted.description ?? '' }, ...prev])
       setUrl('')
       setTitle('')
       return
@@ -80,7 +80,7 @@ export default function ClientHome(): JSX.Element {
     }
 
     const id = Date.now()
-    const newProject = { id, url: newUrl, title: title || 'Sem título', desc: '' }
+    const newProject = { id, url: newUrl, title: title || 'Sem título', description: '' }
     setProjects(prev => [newProject, ...prev])
     setUrl('')
     setTitle('')

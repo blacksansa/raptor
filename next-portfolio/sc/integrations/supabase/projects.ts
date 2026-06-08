@@ -4,7 +4,7 @@ export type ProjectRow = {
   id: number;
   title: string;
   url: string;
-  desc?: string | null;
+  description?: string | null;
   created_at?: string | null;
 };
 

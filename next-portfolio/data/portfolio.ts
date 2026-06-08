@@ -1,5 +1,5 @@
-export type Project = { id: number; url: string; title: string; desc?: string };
+export type Project = { id: number; url: string; title: string; description?: string };
 
 export const initialProjects: Project[] = [
-  { id: 1, url: "https://example.com", title: "Exemplo", desc: "Projeto de exemplo" }
+  { id: 1, url: "https://example.com", title: "Exemplo", description: "Projeto de exemplo" }
 ];
