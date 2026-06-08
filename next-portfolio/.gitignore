@@ -1,0 +1,16 @@
+# Node
+node_modules/
+
+# Next.js
+.next/
+
+# Env
+.env.local
+.env
+
+# Vercel
+.vercel/
+
+# Editor
+.vscode/
+.DS_Store
