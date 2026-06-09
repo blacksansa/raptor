@@ -429,11 +429,13 @@ section {
   background: #0A0A0A;
 }
 .preview-frame-wrap iframe {
-  /* Scale compensation: size iframe so its scaled viewport exactly fits the 220px container. */
-  width: calc(100% / 0.29);
-  height: calc(220px / 0.29);
+  /* Scale compensation: size iframe so its scaled viewport exactly fits the 220px container.
+     Add a small extra width/height and shift the iframe left so an internal vertical scrollbar is pushed outside
+     the visible area when scaled. The wrapper has overflow:hidden so the scrollbar will be clipped. */
+  width: calc(100% / 0.29 + 40px);
+  height: calc(220px / 0.29 + 40px);
   border: none;
-  transform: scale(0.29);
+  transform: translateX(-20px) scale(0.29);
   transform-origin: top left;
   pointer-events: none;
   display: block;

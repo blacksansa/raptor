@@ -476,11 +476,11 @@ export default function RootLayout({ children }) {
 
   .preview-frame-wrap iframe {
     /* Ensure the iframe content is scaled to fit the preview container without inner scrollbars.
-       Set the iframe element to be larger than the container (then scale down) so the inner viewport fits. */
-    width: calc(100% / 0.29);
-    height: calc(220px / 0.29);
+       Add extra size and shift left so the iframe's native scrollbar is clipped by the wrapper. */
+    width: calc(100% / 0.29 + 40px);
+    height: calc(220px / 0.29 + 40px);
     border: none;
-    transform: scale(0.29);
+    transform: translateX(-20px) scale(0.29);
     transform-origin: top left;
     pointer-events: none;
     display: block;
