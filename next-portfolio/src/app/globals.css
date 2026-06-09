@@ -429,12 +429,14 @@ section {
   background: #0A0A0A;
 }
 .preview-frame-wrap iframe {
-  /* Increase offset so the iframe's native vertical scrollbar is pushed further outside the visible area.
-     UA may add an inset border — force border:none with !important to remove it. */
+  /* Position absolute so iframe never expands parent layout; shift left to hide native scrollbar. */
+  position: absolute;
+  top: 0;
+  left: -40px;
   width: calc(100% / 0.29 + 80px);
   height: calc(220px / 0.29 + 80px);
   border: none !important;
-  transform: translateX(-40px) scale(0.29);
+  transform: scale(0.29);
   transform-origin: top left;
   pointer-events: none;
   display: block;
